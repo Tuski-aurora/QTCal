@@ -11,7 +11,72 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>计算器-黄德民-2024414300210</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+    background-color: #2b2b2b;
+}
+
+/* 全部按钮基础样式 */
+QPushButton{
+    font-family:Microsoft YaHei;
+    font-size:18pt;
+    font-weight:500;
+    border-radius:8px;
+    border:none;
+    background-color:#424242;
+    color:#ffffff;
+    min-height:50px;
+}
+QPushButton:hover{
+    background-color:#545454;
+}
+QPushButton:pressed{
+    background-color:#2f2f2f;
+}
+
+QPushButton#BtnAdd,#BtnSub,#BtnMul,#BtnDiv{
+    background-color:#705c48;
+    color:white;
+}
+QPushButton#BtnAdd:hover,#BtnSub:hover,#BtnMul:hover,#BtnDiv:hover{
+    background-color:#836d57;
+}
+QPushButton#BtnAdd:pressed,#BtnSub:pressed,#BtnMul:pressed,#BtnDiv:pressed{
+    background-color:#594a39;
+}
+
+QPushButton#BtnCe,#BtnClear{
+    background-color:#6b3838;
+}
+QPushButton#BtnCe:hover,#BtnClear:hover{
+    background-color:#804646;
+}
+QPushButton#BtnCe:pressed,#BtnClear:pressed{
+    background-color:#502828;
+}
+
+QPushButton#BtnBack{
+    background-color:#555555;
+}
+QPushButton#BtnBack:hover{
+    background-color:#666666;
+}
+QPushButton#BtnBack:pressed{
+    background-color:#3d3d3d;
+}
+
+QLabel#Display{
+    background-color:#181818;
+    color:#f0f0f0;
+    font-family:Microsoft YaHei;
+    font-size:28pt;
+    font-weight:500;
+    border:none;
+    padding:12px;
+    text-align:right;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
@@ -27,17 +92,24 @@
         </property>
         <property name="font">
          <font>
-          <family>Javanese Text</family>
+          <family>Microsoft YaHei</family>
           <pointsize>28</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
+          <weight>62</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="layoutDirection">
          <enum>Qt::RightToLeft</enum>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">background-color:#181818;
+    color:#f0f0f0;
+    font-family:Microsoft YaHei;
+    font-size:28pt;
+    font-weight:500;
+    border:none;
+    padding:12px;
+    text-align:right;</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
