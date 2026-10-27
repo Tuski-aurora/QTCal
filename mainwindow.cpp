@@ -11,6 +11,26 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
+    digBtns = {
+        {Qt::Key_0, ui->BtnNum0},
+        {Qt::Key_1, ui->BtnNum1},
+        {Qt::Key_2, ui->BtnNum2},
+        {Qt::Key_3, ui->BtnNum3},
+        {Qt::Key_4, ui->BtnNum4},
+        {Qt::Key_5, ui->BtnNum5},
+        {Qt::Key_6, ui->BtnNum6},
+        {Qt::Key_7, ui->BtnNum7},
+        {Qt::Key_8, ui->BtnNum8},
+        {Qt::Key_9, ui->BtnNum9},
+    };
+
+    foreach (auto btn, digBtns )
+    {
+        connect(btn, SIGNAL(clicked()), this, SLOT(on_BtnNum_clicked()));
+    }
+
+
+    /*//数字信号
     connect(ui->BtnNum0,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));
     connect(ui->BtnNum1,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));
     connect(ui->BtnNum2,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));
@@ -20,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->BtnNum6,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));
     connect(ui->BtnNum7,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));
     connect(ui->BtnNum8,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));
-    connect(ui->BtnNum9,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));
+    connect(ui->BtnNum9,SIGNAL(clicked()),this,SLOT(on_BtnNum_clicked()));*/
 
 
     //单操作数信号
@@ -30,11 +50,34 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->BtnPercent,SIGNAL(clicked()),this,SLOT(on_BtnSingleOp_clicked()));
     connect(ui->BtnNeg,SIGNAL(clicked()),this,SLOT(on_BtnSingleOp_clicked()));
 
+    doubleOpBtns = {
+        {Qt::Key_Plus,  ui->BtnAdd},
+        {Qt::Key_Minus, ui->BtnSub},
+        {Qt::Key_Asterisk, ui->BtnMul},
+        {Qt::Key_Slash, ui->BtnDiv}
+    };
 
+    foreach (auto btn, doubleOpBtns)
+    {
+        connect(btn, SIGNAL(clicked()), this, SLOT(on_BtnOp_clicked()));
+    }
+
+    /*
+    //双操作数信号
     connect(ui->BtnAdd,SIGNAL(clicked()),this,SLOT(on_BtnOp_clicked()));
     connect(ui->BtnDiv,SIGNAL(clicked()),this,SLOT(on_BtnOp_clicked()));
     connect(ui->BtnMul,SIGNAL(clicked()),this,SLOT(on_BtnOp_clicked()));
-    connect(ui->BtnSub,SIGNAL(clicked()),this,SLOT(on_BtnOp_clicked()));
+    connect(ui->BtnSub,SIGNAL(clicked()),this,SLOT(on_BtnOp_clicked()));*/
+
+    funcBTNs = {
+        {Qt::Key_Enter, ui->BtnEq},    // 回车键 =
+        {Qt::Key_Return, ui->BtnEq},
+        {Qt::Key_Percent, ui->BtnPercent}, // %
+        {Qt::Key_Backspace, ui->BtnBack},  // 退格
+        {Qt::Key_Period, ui->BtnDot}       // 小数点
+    };
+
+}
 
 MainWindow::~MainWindow()
 {
@@ -87,7 +130,7 @@ void MainWindow::on_BtnOp_clicked()
         }
     }
 
-    // 【统一处理运算符：弹出旧运算符，压入新运算符】
+    // 【统一处理运算符：弹出旧运算符，压入新运算符，这就是你要求的逻辑】
     if(!opcodes.isEmpty())
     {
         opcodes.pop();
@@ -262,4 +305,32 @@ void MainWindow::on_BtnCe_clicked()
     ui->Display->setText("0");
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    foreach(auto btnKey, digBtns.keys())
+    {
+        if(event->key() == btnKey)
+        {
+            digBtns[btnKey]->animateClick(100);
+        }
+    }
+
+    foreach(auto btnKey, doubleOpBtns.keys())
+    {
+        if(event->key() == btnKey)
+        {
+            doubleOpBtns[btnKey]->animateClick(100);
+        }
+    }
+
+    foreach(auto btnKey, funcBTNs.keys())
+    {
+        if(event->key() == btnKey)
+        {
+            funcBTNs[btnKey]->animateClick(100);
+        }
+    }
+
+
+}
 
